@@ -1,0 +1,6 @@
+set _autoclean  1
+set defaultarch amd64
+
+deb http://download.mono-project.com/repo/ubuntu xenial main
+
+clean http://download.mono-project.com/repo/ubuntu

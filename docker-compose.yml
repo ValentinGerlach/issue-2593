@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./conf:/etc/traefik
+
+  aptmirror:
+    image: thomass/apt-mirror
+    restart: "no"
+    volumes:
+      - ./mirror.list:/etc/apt/mirror.list
+      - data:/var/spool/apt-mirror
+
+  caddy:
+    image: abiosoft/caddy
+    restart: unless-stopped
+    volumes:
+      - ./Caddyfile:/etc/Caddyfile:ro
+      - data:/srv:ro
+    labels:
+      - traefik.enable=true
+
+volumes:
+  data:

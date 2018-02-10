@@ -1,0 +1,5 @@
+:80
+browse
+root /srv/mirror/download.mono-project.com/
+errors stdout
+gzip
